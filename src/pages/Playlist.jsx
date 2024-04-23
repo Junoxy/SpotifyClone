@@ -14,7 +14,7 @@ const Playlist = ({ spotifyAPI, token }) => {
 			items.map((item, i) => {
 				console.log({ item, i });
 				const { track } = item;
-				track.contextUri = `spotify:playlist${id}`;
+				track.contextUri = `spotify:playlist:${id}`;
 				track.position = i;
 				return track;
 			}),
@@ -140,7 +140,7 @@ const Playlist = ({ spotifyAPI, token }) => {
 				</Box>
 			</Box>
             <Box>
-                <SongTable/>
+                <SongTable songs={songs} loading={status.isLoading} spotifyAPI={spotifyAPI} />
             </Box>
 		</Box>
 	);
