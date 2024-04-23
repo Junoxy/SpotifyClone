@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavPlaylist = ({ name, id, loading }) => {
 	return (
-		<NavLink className={'playlist-navlink'} to={loading ? '' : `playlist${id}`} style={{ textDecoration: 'none' }}>
+		<NavLink className={'playlist-navlink'} to={loading ? '' : `playlist/${id}`} style={{ textDecoration: 'none' }}>
 			<Box
 				px={3}
 				py={1}
