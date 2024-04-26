@@ -1,6 +1,7 @@
 import { Box, Grid, Typography, Avatar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import PlayerControls from '../PlayerControls/PlayerControls';
+import PlayerVolume from '../PlayerVolume/PlayerVolume';
 
 const Player = ({ spotifyAPI, token }) => {
 	const [localPlayer, setLocalPlayer] = useState(null);
@@ -131,7 +132,7 @@ const Player = ({ spotifyAPI, token }) => {
 					 :  <Box> Please Transfer Playback </Box> }
 				</Grid>
 				<Grid item xs={4} md={4} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-					Volume
+					<PlayerVolume player={localPlayer}/>
 				</Grid>
 			</Grid>
 		</Box>
