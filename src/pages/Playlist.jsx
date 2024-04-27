@@ -12,7 +12,6 @@ const Playlist = ({ spotifyAPI, token }) => {
 	const formatSongs = useCallback(
 		(items) =>
 			items.map((item, i) => {
-				console.log({ item, i });
 				const { track } = item;
 				track.contextUri = `spotify:playlist:${id}`;
 				track.position = i;
@@ -20,7 +19,7 @@ const Playlist = ({ spotifyAPI, token }) => {
 			}),
 		[id]
 	);
-	console;
+	
 
 	useEffect(() => {
 		const getData = async () => {
@@ -31,10 +30,9 @@ const Playlist = ({ spotifyAPI, token }) => {
 					image: playlistDetails.body.images[0].url,
 					name: playlistDetails.body.name
 				});
-				console.log(playlistDetails);
+				
 				const { items } = playlistDetails.body.tracks;
-				console.log(items);
-				// format songs
+	
 				const formattedSongs = formatSongs(items);
 				setSongs(formattedSongs);
 			} catch (error) {
@@ -80,16 +78,19 @@ const Playlist = ({ spotifyAPI, token }) => {
 				}}
 			>
 				{status.isLoading ? (
-					<Skeleton variant='square' sx={{
-                        width: {
-                            xs: '100%',
-                            md: '235px'
-                        },
-                        height: {
-                            xs: '100%',
-                            md: '235px'
-                        }
-                    }}/>
+					<Skeleton
+						variant="square"
+						sx={{
+							width: {
+								xs: '100%',
+								md: '235px'
+							},
+							height: {
+								xs: '100%',
+								md: '235px'
+							}
+						}}
+					/>
 				) : (
 					<Avatar
 						src={playlistInfo?.image}
@@ -118,30 +119,35 @@ const Playlist = ({ spotifyAPI, token }) => {
 					>
 						Playlist
 					</Typography>
-					{status.isLoading ? <Skeleton sx={{
-							fontSize: {
-								xs: '42px',
-								md: '72px'
-							},
-                            width: '250px'
-				
-						}}/> : <Typography
-						sx={{
-							fontSize: {
-								xs: '42px',
-								md: '72px'
-							},
-							fontWeight: 'bold',
-							color: 'text.primary'
-						}}
-					>
-						{playlistInfo?.name}
-					</Typography>}
+					{status.isLoading ? (
+						<Skeleton
+							sx={{
+								fontSize: {
+									xs: '42px',
+									md: '72px'
+								},
+								width: '250px'
+							}}
+						/>
+					) : (
+						<Typography
+							sx={{
+								fontSize: {
+									xs: '42px',
+									md: '72px'
+								},
+								fontWeight: 'bold',
+								color: 'text.primary'
+							}}
+						>
+							{playlistInfo?.name}
+						</Typography>
+					)}
 				</Box>
 			</Box>
-            <Box>
-                <SongTable songs={songs} loading={status.isLoading} spotifyAPI={spotifyAPI} />
-            </Box>
+			<Box>
+				<SongTable songs={songs} loading={status.isLoading} spotifyAPI={spotifyAPI} />
+			</Box>
 		</Box>
 	);
 };

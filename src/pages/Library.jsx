@@ -12,7 +12,6 @@ const Library = ({ spotifyAPI, token }) => {
 			const data = await spotifyAPI.getUserPlaylists();
             setLoading(false);
 			setAlbumList(data.body.items);
-			console.log(data.body.items);
 			
 		};
 		getPlaylists();

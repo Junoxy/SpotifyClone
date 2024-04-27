@@ -44,7 +44,6 @@ const Player = ({ spotifyAPI, token }) => {
 				if (!state || !state.track_window?.current_track) {
 					return;
 				}
-				console.log(state);
 				const duration = state.track_window.current_track.duration_ms / 1000;
 				const progress = state.position / 1000;
 				setDuration(duration);
@@ -92,7 +91,7 @@ const Player = ({ spotifyAPI, token }) => {
 			<Grid
 				onClick={() => {
 					setPlayerOverlayIsOpen((prevState) => !prevState);
-					console.log('Open');
+					
 				}}
 				container
 				px={3}

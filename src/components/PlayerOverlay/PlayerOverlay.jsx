@@ -2,7 +2,16 @@ import { Box, Button, Container, Grid, IconButton, Typography } from '@mui/mater
 import { KeyboardArrowDown } from '@mui/icons-material';
 import PlayerControls from '../PlayerControls/PlayerControls';
 
-const PlayerOverlay = ({ PlayerOverlayIsOpen, closeOverlay, progress, isPaused, duration, player, current_track, active}) => {
+const PlayerOverlay = ({
+	PlayerOverlayIsOpen,
+	closeOverlay,
+	progress,
+	isPaused,
+	duration,
+	player,
+	current_track,
+	active
+}) => {
 	return (
 		<Box
 			id="player-overlay"
@@ -28,26 +37,32 @@ const PlayerOverlay = ({ PlayerOverlayIsOpen, closeOverlay, progress, isPaused, 
 					<Grid
 						item
 						xs={5}
-						sx={{ backgroundImage: `url('${current_track?.album.images[0].url}')`, backgroundPosition: 'center', backgroundSize: 'cover' }}
+						sx={{
+							backgroundImage: `url('${current_track?.album.images[0].url}')`,
+							backgroundPosition: 'center',
+							backgroundSize: 'cover'
+						}}
 					></Grid>
 					<Grid item xs={1}>
-						
-						<Typography color={'text.primary'} fontSize={'28px'}>{current_track?.name}</Typography>
-						<Typography color={'text.secondary'} fontSize={'18px'}>{current_track?.artists[0].name}</Typography>
+						<Typography color={'text.primary'} fontSize={'28px'}>
+							{current_track?.name}
+						</Typography>
+						<Typography color={'text.secondary'} fontSize={'18px'}>
+							{current_track?.artists[0].name}
+						</Typography>
 					</Grid>
-                    <Grid item>
-                    {active ? (
-						<PlayerControls
-							progress={progress}
-							isPaused={isPaused}
-							duration={duration}
-							player={player}
-						/>
-					) : (
-						<Box> Please Transfer Playback </Box>
-					)}
-                        
-                    </Grid>
+					<Grid item>
+						{active ? (
+							<PlayerControls
+								progress={progress}
+								isPaused={isPaused}
+								duration={duration}
+								player={player}
+							/>
+						) : (
+							<Box> Please Transfer Playback </Box>
+						)}
+					</Grid>
 				</Grid>
 			</Container>
 		</Box>

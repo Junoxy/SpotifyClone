@@ -8,22 +8,21 @@ const PlayerControls = ({ isPaused, duration, progress, player }) => {
 	const skipStyle = { width: '28px', height: '28px' };
 	const playStyle = { width: '38px', height: '38px' };
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            if(!isPaused && player) {
-                setCurrentProgress((prevState) => prevState + 1)
-            }
-        }, 1000)
-        
-        return () => {
-            clearInterval(intervalId)
-        }
-    },[isPaused, player])
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			if (!isPaused && player) {
+				setCurrentProgress((prevState) => prevState + 1);
+			}
+		}, 1000);
 
+		return () => {
+			clearInterval(intervalId);
+		};
+	}, [isPaused, player]);
 
-    useEffect(() => {
-        setCurrentProgress(progress)
-    },[progress])
+	useEffect(() => {
+		setCurrentProgress(progress);
+	}, [progress]);
 
 	return (
 		<Stack direction={'column'} spacing={2} justifyContent={'center'} alignItems={'center'} sx={{ width: '100%' }}>
@@ -46,7 +45,7 @@ const PlayerControls = ({ isPaused, duration, progress, player }) => {
 						player.togglePlay();
 					}}
 				>
-					{ isPaused ? <PlayArrow sx={playStyle} /> : <Pause sx={playStyle} />}
+					{isPaused ? <PlayArrow sx={playStyle} /> : <Pause sx={playStyle} />}
 				</IconButton>
 
 				<IconButton
@@ -64,13 +63,19 @@ const PlayerControls = ({ isPaused, duration, progress, player }) => {
 				<Typography sx={{ color: 'text.secondary', fontSize: '12px' }}>
 					{formatTime(currentProgress)}
 				</Typography>
-				<Slider max={duration} value={currentProgress} min={0} size="medium" onChange={(event, value) => {
-                        console.log('changed', value)
-                        setCurrentProgress(value)
-                }} onChangeCommitted={(event, value) => {
-                    player.seek( value * 1000 )
-                    
-                }}/>
+				<Slider
+					max={duration}
+					value={currentProgress}
+					min={0}
+					size="medium"
+					onChange={(event, value) => {
+						console.log('changed', value);
+						setCurrentProgress(value);
+					}}
+					onChangeCommitted={(event, value) => {
+						player.seek(value * 1000);
+					}}
+				/>
 				<Typography sx={{ color: 'text.secondary', fontSize: '12px' }}>{formatTime(duration)}</Typography>
 			</Stack>
 		</Stack>
