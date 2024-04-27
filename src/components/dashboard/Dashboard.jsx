@@ -6,9 +6,12 @@ import Playlist from "../../pages/Playlist";
 import { getAccessTokenFromStorage } from "../../utils/getAccessTokenFromStorage";
 import { useEffect, useState } from "react";
 import Player from "../Player/Player";
+import MobileNav from "../MobileNav/MobileNav";
+import Library from '../../pages/Library'
 
 const Dashboard = ( {spotifyAPI } ) => {
     const [token, setToken] = useState(getAccessTokenFromStorage())
+    
 
     useEffect(() => {
         const onMount = async () => {
@@ -33,11 +36,12 @@ const Dashboard = ( {spotifyAPI } ) => {
                     <SideNav spotifyAPI={spotifyAPI} token={token}/>
                     <Routes>
                         <Route path="/playlist/:id" element={<Playlist spotifyAPI={spotifyAPI} token={token}/>}/>
-                        <Route path="/library" element={<div>Library</div>}/>
+                        <Route path="/library" element={<Library spotifyAPI={spotifyAPI} token={token}/>}/>
                         <Route path='/' element={<Home/>}/>
                     </Routes>
                 </Box>
                 {token && <Player spotifyAPI={spotifyAPI} token={token} />}
+                <MobileNav/>
            </Box>
     
 }

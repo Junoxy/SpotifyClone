@@ -2,6 +2,7 @@ import { Box, Grid, Typography, Avatar } from '@mui/material';
 import { useEffect, useState } from 'react';
 import PlayerControls from '../PlayerControls/PlayerControls';
 import PlayerVolume from '../PlayerVolume/PlayerVolume';
+import PlayerOverlay from '../PlayerOverlay/PlayerOverlay';
 
 const Player = ({ spotifyAPI, token }) => {
 	const [localPlayer, setLocalPlayer] = useState(null);
@@ -11,6 +12,7 @@ const Player = ({ spotifyAPI, token }) => {
 	const [duration, setDuration] = useState();
 	const [progress, setProgress] = useState();
 	const [active, setActive] = useState();
+	const [PlayerOverlayIsOpen, setPlayerOverlayIsOpen] = useState(false);
 
 	useEffect(() => {
 		const script = document.createElement('script');
@@ -88,6 +90,10 @@ const Player = ({ spotifyAPI, token }) => {
 	return (
 		<Box>
 			<Grid
+				onClick={() => {
+					setPlayerOverlayIsOpen((prevState) => !prevState);
+					console.log('Open');
+				}}
 				container
 				px={3}
 				sx={{
@@ -122,19 +128,33 @@ const Player = ({ spotifyAPI, token }) => {
 					}}
 					md={4}
 				>
-					{active ? 
+					{active ? (
 						<PlayerControls
 							progress={progress}
 							isPaused={isPaused}
 							duration={duration}
 							player={localPlayer}
 						/>
-					 :  <Box> Please Transfer Playback </Box> }
+					) : (
+						<Box> Please Transfer Playback </Box>
+					)}
 				</Grid>
-				<Grid item xs={4} md={4} sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-					<PlayerVolume player={localPlayer}/>
+				<Grid item xs={4} md={4} sx={{ display: {xs: 'none', md: 'flex'}, justifyContent: 'flex-end', alignItems: 'center' }}>
+					<PlayerVolume player={localPlayer} />
 				</Grid>
 			</Grid>
+			<PlayerOverlay
+				PlayerOverlayIsOpen={PlayerOverlayIsOpen}
+				closeOverlay={() => {
+					setPlayerOverlayIsOpen(false);
+				}}
+                progress={progress}
+                isPaused={isPaused}
+                duration={duration}
+				player={localPlayer}
+                current_track={current_track}
+                active={active}
+			/>
 		</Box>
 	);
 };

@@ -123,7 +123,7 @@ const Playlist = ({ spotifyAPI, token }) => {
 								xs: '42px',
 								md: '72px'
 							},
-                            width: '400px'
+                            width: '250px'
 				
 						}}/> : <Typography
 						sx={{
