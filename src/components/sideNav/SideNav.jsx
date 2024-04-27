@@ -30,7 +30,7 @@ const SideNav = ({ spotifyAPI, token }) => {
         display: {xs: 'none', md: 'flex'},
         flexDirection: 'column',
         bgcolor: 'background.default',
-        height: '100%',
+        height: 'calc(100% + 80px)',
         width: 230
 
     }}>
