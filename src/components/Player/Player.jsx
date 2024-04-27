@@ -23,7 +23,7 @@ const Player = ({ spotifyAPI, token }) => {
 
 		window.onSpotifyWebPlaybackSDKReady = () => {
 			const player = new window.Spotify.Player({
-				name: 'JunoPlayerOwO',
+				name: 'JunoPlayer^^',
 				getOAuthToken: (cb) => {
 					cb(token);
 				},
@@ -139,7 +139,12 @@ const Player = ({ spotifyAPI, token }) => {
 						<Box> Please Transfer Playback </Box>
 					)}
 				</Grid>
-				<Grid item xs={4} md={4} sx={{ display: {xs: 'none', md: 'flex'}, justifyContent: 'flex-end', alignItems: 'center' }}>
+				<Grid
+					item
+					xs={4}
+					md={4}
+					sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', alignItems: 'center' }}
+				>
 					<PlayerVolume player={localPlayer} />
 				</Grid>
 			</Grid>
@@ -148,12 +153,12 @@ const Player = ({ spotifyAPI, token }) => {
 				closeOverlay={() => {
 					setPlayerOverlayIsOpen(false);
 				}}
-                progress={progress}
-                isPaused={isPaused}
-                duration={duration}
+				progress={progress}
+				isPaused={isPaused}
+				duration={duration}
 				player={localPlayer}
-                current_track={current_track}
-                active={active}
+				current_track={current_track}
+				active={active}
 			/>
 		</Box>
 	);
