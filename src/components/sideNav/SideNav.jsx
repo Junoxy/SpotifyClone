@@ -5,21 +5,22 @@ import HomeIcon from '@mui/icons-material/Home';
 import NavPlaylist from '../NavPlaylist/NavPlaylist';
 
 const SideNav = ({ spotifyAPI, token }) => {
-	const [playlists, setPlaylists] = useState([]);
+	const [playlists, setPlaylists] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const getPlaylists = async () => {
 			if (!spotifyAPI) return;
 			const data = await spotifyAPI.getUserPlaylists();
-			setLoading(false);
+            setLoading(false);
 			setPlaylists(data.body.items);
+			
 		};
 		getPlaylists();
 	}, [spotifyAPI, token]);
 
 	const renderPlaylists = () => {
-		if(loading) {
+		if (loading) {
 			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
 				(_, i) => <NavPlaylist key={i} loading={loading} />
 			);
