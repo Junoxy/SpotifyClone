@@ -10,19 +10,18 @@ const Library = ({ spotifyAPI, token }) => {
 		const getPlaylists = async () => {
 			if (!spotifyAPI) return;
 			const data = await spotifyAPI.getUserPlaylists();
-            setLoading(false);
+			setLoading(false);
 			setAlbumList(data.body.items);
-			
 		};
 		getPlaylists();
 	}, [spotifyAPI, token]);
 
-    const renderPlaylistItems = () => {
-        if(loading) {
-           return [1,2,3,4,5,6,7,8,9,10].map((e,i) => <PlaylistItem loading={loading} key={i}/>)
-        }
-        return albumList.map((albumList,i) => <PlaylistItem key={i} loading={loading} {...albumList} />)
-    }
+	const renderPlaylistItems = () => {
+		if (loading) {
+			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e, i) => <PlaylistItem loading={loading} key={i} />);
+		}
+		return albumList.map((albumList, i) => <PlaylistItem key={i} loading={loading} {...albumList} />);
+	};
 
 	return (
 		<Box
@@ -39,9 +38,7 @@ const Library = ({ spotifyAPI, token }) => {
 			<Typography py={3} sx={{ color: 'text.primary', fontSize: '30px' }}>
 				Your Library
 			</Typography>
-			<List>
-				{renderPlaylistItems()}
-			</List>
+			<List>{renderPlaylistItems()}</List>
 		</Box>
 	);
 };
