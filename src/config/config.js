@@ -24,6 +24,7 @@ export const scopes = [
     'user-follow-modify',
     'user-follow-read',
     'user-read-recently-played'
+    
     ];
 
 export const accessURL = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectURL}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
