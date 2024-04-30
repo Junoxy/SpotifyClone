@@ -11,7 +11,7 @@ import Library from '../../pages/Library';
 
 const Dashboard = ({ spotifyAPI }) => {
 	const [token, setToken] = useState(getAccessTokenFromStorage());
-	const [hasConnected, setHasConnected] = useState(false());
+	const [hasConnected, setHasConnected] = useState(false);
 
 	useEffect(() => {
 		const onMount = async () => {
