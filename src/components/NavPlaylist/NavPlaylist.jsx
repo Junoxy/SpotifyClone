@@ -16,7 +16,7 @@ const NavPlaylist = ({ name, id, loading }) => {
 				}}
 			>
 			
-				{loading ? <Skeleton variant='text' sx={{fontSize: '12px'}}/> :name}
+				{loading ? <Skeleton variant='text' sx={{fontSize: '12px'}}/> : name }
 			</Box>
 		</NavLink>
 	);
