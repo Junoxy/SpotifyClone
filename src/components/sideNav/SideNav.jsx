@@ -1,52 +1,52 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Divider } from '@mui/material';
-import NavItem from '../navItem/NavItem';
-import HomeIcon from '@mui/icons-material/Home';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import NavItem from '../NavItem/NavItem';
 import NavPlaylist from '../NavPlaylist/NavPlaylist';
 
-const SideNav = ({ spotifyAPI, token }) => {
-	const [playlists, setPlaylists] = useState(null);
+const SideNav = ({ spotifyApi, token }) => {
+	const [albumList, setAlbumList] = useState(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		const getPlaylists = async () => {
-			if (!spotifyAPI) return;
-			const data = await spotifyAPI.getUserPlaylists();
-            setLoading(false);
-			setPlaylists(data.body.items);
-			
-		};
-		getPlaylists();
-	}, [spotifyAPI, token]);
-
-	const renderPlaylists = () => {
-		if (loading) {
-			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
-				(_, i) => <NavPlaylist key={i} loading={loading} />
-			);
+		async function getPlaylists() {
+			if (!spotifyApi) return;
+			const data = await spotifyApi.getUserPlaylists();
+			setLoading(false);
+			setAlbumList(data.body.items);
 		}
-		console.log(playlists);
-		return playlists.map((playlist, i) => <NavPlaylist key={i} id={playlist.id} name={playlist.name} />);
+		getPlaylists();
+	}, [spotifyApi, token]);
+
+	const renderPlaylist = () => {
+		if (loading) {
+			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, id) => {
+				return <NavPlaylist key={id} loading={loading} />;
+			});
+		}
+		return albumList.map((playlist, id) => {
+			return <NavPlaylist key={id} id={playlist.id} loading={loading} name={playlist.name} />;
+		});
 	};
 
 	return (
 		<Box
 			sx={{
-				display: { xs: 'none', md: 'flex' },
-				flexDirection: 'column',
 				bgcolor: 'background.default',
-				height: 'calc(100% + 80px)',
-				width: 230
+				width: 230,
+				height: '100%',
+				display: { xs: 'none', md: 'flex' },
+				flexDirection: 'column'
 			}}
 		>
 			<Box p={3}>
-				<img src="/Spotify_Logo.png" alt="" style={{ width: '75%' }} />
+				<img src="/Spotify_Logo.png" width={'75%'} alt="Spotify" />
 			</Box>
-			<NavItem name="Home" Icon={HomeIcon} target={'/'} />
+			<NavItem name="Home" Icon={HomeRoundedIcon} target="/" active />
 			<Box px={3} py={1}>
-				<Divider sx={{ backgroundColor: '#ffffff40' }}></Divider>
+				<Divider sx={{ backgroundColor: '#ffffff40' }} />
 			</Box>
-			<Box sx={{ overflowY: 'auto', flex: 1 }}>{renderPlaylists()}</Box>
+			<Box sx={{ overflowY: 'auto', flex: 1 }}>{renderPlaylist()}</Box>
 		</Box>
 	);
 };
