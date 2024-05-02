@@ -28,14 +28,13 @@ const PlayerOverlay = ({
 			}}
 		>
 			<Container sx={{ height: '100%', background: 'linear-gradient(0deg, #121212 0%, #39d47250 100%)' }}>
-				<Grid container direction={'column'} justifyContent={'space-between'} sx={{ height: '100%' }}>
+				<Grid container direction={'column'}  justifyContent={'space-between'} sx={{ height: '100%' }}>
 					<Grid item xs={1} sx={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
 						<IconButton onClick={closeOverlay} sx={{ paddingLeft: '0px' }}>
 							<KeyboardArrowDown fontSize="large" sx={{ color: 'text.primary' }} />
 						</IconButton>
 					</Grid>
-					<Grid
-						item
+					<Grid item
 						xs={5}
 						sx={{
 							backgroundImage: `url('${current_track?.album.images[0].url}')`,
@@ -43,7 +42,7 @@ const PlayerOverlay = ({
 							backgroundSize: 'cover'
 						}}
 					></Grid>
-					<Grid item xs={1}>
+					<Grid item xs={3}>
 						<Typography color={'text.primary'} fontSize={'28px'}>
 							{current_track?.name}
 						</Typography>
@@ -51,7 +50,7 @@ const PlayerOverlay = ({
 							{current_track?.artists[0].name}
 						</Typography>
 					</Grid>
-					<Grid item>
+					<Grid item sx={{display:'flex', justifyContent:'center'}}>
 						{active ? (
 							<PlayerControls
 								progress={progress}

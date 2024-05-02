@@ -27,7 +27,7 @@ const Dashboard = ({ spotifyAPI }) => {
 		<Box
 			sx={{
 				display: 'flex',
-				height: '100%',
+				height: '100vh',
 				width: '100%',
 				flexDirection: 'column'
 			}}
@@ -39,7 +39,7 @@ const Dashboard = ({ spotifyAPI }) => {
 					display: 'flex'
 				}}
 			>
-				<SideNav spotifyAPI={spotifyAPI} token={token} />
+				{token && hasConnected && <SideNav spotifyAPI={spotifyAPI} token={token} />}
 				<Routes>
 					<Route path="/playlist/:id" element={hasConnected && <Playlist spotifyAPI={spotifyAPI} token={token} />} />
 					<Route path="/library" element={hasConnected && <Library spotifyAPI={spotifyAPI} token={token} />} />
